@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Se puede ser amigo de un ex? Vota y opina - El Oráculo</title>
+    <meta name="description" content="¿Es madurez o una bomba de tiempo? Entra, vota de forma anónima, mira los porcentajes del mundo y conoce personas con tu misma opinión.">
+    
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Quiz",
+      "name": "¿Se puede realmente ser amigo de un ex?",
+      "description": "Un dilema interactivo sobre las relaciones de pareja y la amistad post-ruptura.",
+      "hasPart": {
+        "@type": "Question",
+        "name": "¿Es posible mantener una amistad sana con una expareja?",
+        "suggestedAnswer": [
+          { "@type": "Answer", "text": "Sí, con la madurez suficiente se puede." },
+          { "@type": "Answer", "text": "No, es una bomba de tiempo emocional." }
+        ]
+      }
+    }
+    </script>
+</head>
+<body>
+
+    <header>
+        <nav class="clearfix">
+            <div class="logo">🔮 El Oráculo</div>
+            <ul>
+                <li><a href="#">Dilemas Populares</a></li>
+                <li><a href="#">Mi Perfil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="ads-container">
+        <div class="ad-box">
+            <p class="ad-label">Publicidad Recomendada (Banner Superior)</p>
+        </div>
+    </div>
+
+    <main>
+        <article>
+            <span class="category">Psicología de Pareja</span>
+            <h1>¿Se puede realmente ser amigo de un ex?</h1>
+            <p class="intro-text">Un debate eterno. Unos dicen que donde hubo fuego, cenizas quedan; otros, que la madurez lo permite todo. ¿Tú qué opinas?</p>
+            
+            <div class="poll-container">
+                <button class="poll-btn" onclick="votar('si')">👍 Sí, con la madurez suficiente se puede</button>
+                <button class="poll-btn" onclick="votar('no')">👎 No, es una bomba de tiempo emocional</button>
+            </div>
+
+            <div id="results-counter" style="display: none; margin-top: 20px; font-weight: bold; text-align: center; color: var(--primary-color);">
+                <p>Resultados globales: <span id="count-si">0</span>% Sí | <span id="count-no">0</span>% No</p>
+            </div>
+        </article>
+    </main>
+
+    <div class="ads-container">
+        <div class="ad-box">
+            <p class="ad-label">Publicidad (Bloque de Anuncios Enlazados)</p>
+        </div>
+    </div>
+
+    <section class="matches-section" id="matches" style="display:none;">
+        <h2>Personas compatibles cerca de ti que votaron lo mismo:</h2>
+        <div id="profiles-container">
+            </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 El Oráculo de las Parejas - Todos los derechos reservados.</p>
+        <p style="font-size: 0.75rem; margin-top: 5px;">
+            <a href="#" style="color: gray; text-decoration: none;">Política de Privacidad</a> | 
+            <a href="#" style="color: gray; text-decoration: none;">Términos de Uso</a>
+        </p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
+:root {
+    --bg-color: #f4f6f9;
+    --card-bg: #ffffff;
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding-bottom: 40px;
+}
+
+header {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+nav .logo {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    float: left;
+}
+
+nav ul {
+    list-style: none;
+    float: right;
+    margin-top: 4px;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+main {
+    max-width: 650px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+article {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--border-color);
+}
+
+.category {
+    display: inline-block;
+    background-color: #e0e7ff;
+    color: var(--primary-color);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+.intro-text {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 30px;
+}
+
+.poll-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    border: 2px solid var(--border-color);
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.poll-btn:hover {
+    border-color: var(--primary-color);
+    background-color: #f5f7ff;
+    transform: translateY(-2px);
+}
+
+.ads-container {
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.ad-box {
+    background-color: #eef2f6;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    min-height: 100px;
+    text-align: center;
+}
+
+.ad-label {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-top: 40px;
+}
+
+.matches-section {
+    max-width: 650px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.matches-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+
+.profile-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+}
+
+.profile-left {
+    float: left;
+    width: 50px;
+}
+
+.profile-right {
+    float: left;
+    width: calc(100% - 50px);
+    padding-left: 15px;
+}
+
+.avatar-blur {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #a5b4fc, #818cf8);
+    border-radius: 50%;
+    filter: blur(5px);
+}
+
+.profile-name {
+    font-weight: 700;
+}
+
+.profile-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+footer {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}function votar(opcionSeleccionada) {
+    const botones = document.querySelectorAll('.poll-btn');
+    
+    // Deshabilitar botones para evitar doble voto
+    botones.forEach(boton => {
+        boton.disabled = true;
+        boton.style.opacity = '0.5';
+        boton.style.cursor = 'not-allowed';
+    });
+
+    // Aplicar colores de éxito según la opción
+    botones.forEach(boton => {
+        if (opcionSeleccionada === 'si' && boton.textContent.includes('Sí')) {
+            boton.style.borderColor = '#10b981';
+            boton.style.backgroundColor = '#ecfdf5';
+            boton.style.opacity = '1';
+        } else if (opcionSeleccionada === 'no' && boton.textContent.includes('No')) {
+            boton.style.borderColor = '#ef4444';
+            boton.style.backgroundColor = '#fef2f2';
+            boton.style.opacity = '1';
+        }
+    });
+
+    // Simular porcentajes de votación globales
+    document.getElementById('count-si').textContent = opcionSeleccionada === 'si' ? '54' : '48';
+    document.getElementById('count-no').textContent = opcionSeleccionada === 'si' ? '46' : '52';
+    document.getElementById('results-counter').style.display = 'block';
+
+    // Generar perfiles dinámicos según el voto
+    generarPerfilesCompatibles(opcionSeleccionada);
+
+    // Mostrar sección de parejas y hacer scroll suave
+    const seccionCompatibles = document.getElementById('matches');
+    seccionCompatibles.style.display = 'block';
+    seccionCompatibles.scrollIntoView({ behavior: 'smooth' });
+}
+
+function generarPerfilesCompatibles(voto) {
+    const contenedor = document.getElementById('profiles-container');
+    contenedor.innerHTML = ''; // Limpiar contenedor
+
+    // Base de datos de ejemplo local (Rápida y económica para arrancar)
+    const baseUsuarios = [
+        { nombre: "Camila, 26 años", meta: `Votó igual que tú • A 3 km de ti`, color: "linear-gradient(135deg, #a5b4fc, #818cf8)" },
+        { nombre: "Mateo, 29 años", meta: `Votó igual que tú • A 5 km de ti`, color: "linear-gradient(135deg, #fca5a5, #f87171)" },
+        { nombre: "Sofía, 24 años", meta: `Votó igual que tú • A 8 km de ti`, color: "linear-gradient(135deg, #6ee7b7, #34d399)" }
+    ];
+
+    baseUsuarios.forEach(usuario => {
+        const tarjeta = document.createElement('div');
+        tarjeta.className = 'profile-card';
+        tarjeta.innerHTML = `
+            <div class="profile-flex clearfix">
+                <div class="profile-left">
+                    <div class="avatar-blur" style="background: ${usuario.color}"></div>
+                </div>
+                <div class="profile-right">
+                    <div class="profile-name">${usuario.nombre}</div>
+                    <div class="profile-meta">${usuario.meta}</div>
+                </div>
+            </div>
+        `;
+        contenedor.appendChild(tarjeta);
+    });
+}
+
